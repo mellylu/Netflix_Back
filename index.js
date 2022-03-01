@@ -16,10 +16,10 @@ var port = process.env.PORT;
 var uri = process.env.URL;
 const apiRouter = require('./src/routes');
 
-const corsOptions ={
-   origin:'*',
-   optionSuccessStatus:200,
-}
+// const corsOptions ={
+//    origin:'*',
+//    optionSuccessStatus:200,
+// }
 
 
 const app = express();
@@ -27,9 +27,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use("*", cors());
+app.use(cors());
 app.use('/api/v1/', apiRouter);
-//app.use(cors(corsOptions))
 
 
 //écoute du port
