@@ -34,6 +34,7 @@ exports.register = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
+                success : false,
                 message : err.message || "Some error occured"
             })
         })
@@ -73,7 +74,14 @@ exports.login = (req, res) => {
 
 //GET ALL
 exports.getAll = (req, res) => {
-    const user = User.find()
+    User.find()
+    .populate({
+        path: "favoris",
+        populate:{
+            path:"movie",
+            model:"Movie"
+        }
+    })
     .then((data) => {
         res.send({
             user : data
@@ -124,11 +132,6 @@ exports.getId = (req, res) => {
 
 
 exports.update = (req, res) => {
-    //vérifier cde qui'l y a dans la requetù
-    //je récup le user
-    //2 boucle sur req.body.favoris
-    //si déjà dedans 
-    //on le supprime
     const user = User.findByIdAndUpdate(req.params.id, {
         firstName : req.body.firstName,
         lastName : req.body.lastName,
