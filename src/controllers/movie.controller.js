@@ -26,6 +26,7 @@ exports.post = (req, res) => {
 
 //GET ALL
 exports.getAll = (req, res) => {
+    console.log('yreeseekrg,le')
     let response = {};
     let content = [];
     var req;
